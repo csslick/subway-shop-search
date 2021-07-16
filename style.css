@@ -11,6 +11,7 @@
 
 body {
   color: #333;
+  line-height: 1.6;
 }
 
 h2 {
@@ -18,6 +19,9 @@ h2 {
   margin-bottom: 40px;
 }
 
+ul {
+  list-style-type: none;
+}
 
 .container {
   width: 1200px;
@@ -88,7 +92,13 @@ th {
   z-index: 99;
   background: #fff;
   padding: 30px;
-  height: 320px;
+  width: 350px;
+  height: 400px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+}
+
+#searchForm h2 {
+  margin-bottom: 1rem;
 }
 
 .form-group {
@@ -107,4 +117,28 @@ th {
 #submitBtn {
   border: none;
   background: transparent;
+}
+
+.search_list {
+  padding: 1em;
+  /* border: 1px solid #ccc;  */
+  height: 230px;
+  overflow: auto;
+}
+
+.search_list .title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+} 
+
+.search_list .address {
+  font-size: 14px;
+  color: #999;
+}
+
+.search_list > li {
+  padding: 10px 0;
+  margin-bottom: 1em;
+  border-bottom: 1px solid rgba(0,0,0,0.3);
 }
