@@ -5,10 +5,85 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SUBWAY</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	a2a623bfdc4dde17b428dcc303d2d52e&libraries=services"></script>
   <script src="shopDB.js"></script>
 </head>
 <body>
-  <table class="shops"></table>
+  <section id="map_section">
+    <div class="container">
+      <div id="map" style="width:100%;height:400px;"></div>
+      <form id="searchForm">
+        <h2>매장찾기</h2>
+        <div class="form-group">
+          <input type="search" id="search" placeholder='지역 또는 매장명 입력' size='30'>
+          <button id='submitBtn'>검색</button>
+        </div>
+        <ul class="search_list" style="border: 1px solid; height: 140px;overflow: auto;padding: 1em;"></ul>
+      </form>
+    </div>
+  </section>
+
+  <section id="location">
+    <div class="container">
+      <h2>전체매장</h2>
+      <p class="board_total">총 <b class="shop_count">0</b>개 매장이 있습니다.</p>
+      <table class="shops"></table>
+    </div><!-- end container -->
+  </section>
+
+  <script>
+    // API 참조: https://apis.map.kakao.com/web/sample/addr2coord/
+    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    var options = {
+	    center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+	    level: 3 //지도의 레벨(확대, 축소 정도)
+    };
+
+    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+    // 주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+
+    const searchForm = document.getElementById('searchForm');
+    searchForm.addEventListener('submit', function() {
+      const val = document.getElementById('search').value;
+      document.querySelector('.search_list').innerHTML = '';
+
+      shopDB.forEach(function(shop) {
+        const isTitle = shop.title.includes(val);
+        const isAddress = shop.address.includes(val);
+        console.log(isTitle, isAddress);
+        if(isTitle || isAddress) {
+          document.querySelector('.search_list').innerHTML += `<li>${shop.title}</li>`;
+        } 
+      })
+      // console.log(val)
+    })
+    var shop_address = shopDB[0].address;
+
+    // 주소로 좌표를 검색합니다
+    geocoder.addressSearch(shop_address, function(result, status) {
+      // 정상적으로 검색이 완료됐으면 
+      if (status === kakao.maps.services.Status.OK) {
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: `<div style="width:150px;text-align:center;padding:6px 0;">${shopDB[0].title}</div>`
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+      } 
+    });    
+  </script>
 
   <script src="main.js"></script>
 </body>

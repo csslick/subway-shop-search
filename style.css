@@ -1,0 +1,110 @@
+:root {
+  --main-color1: #009223;
+  --main-color2: #ffc300;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: #333;
+}
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 50px 0px;
+  /* border: 1px solid; */
+}
+.accent {
+  color: var(--main-color1)!important;
+  background: var(--main-color2)!important;
+  border: none!important;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+table a {
+  text-decoration: none;
+  color: #333;
+}
+
+table .address {
+  text-align: left;
+}
+tr:first-child th{
+  border-top: 4px solid var(--main-color1);
+  border-bottom: 1px solid var(--main-color1);
+}
+
+th, td {
+  padding: 20px 1em;
+  border-bottom: 1px solid #ddd;
+}
+th {
+  color: var(--main-color1);
+}
+
+.shops .service span {
+  display: inline-block;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.4);
+  color: rgba(0,0,0,0.4);
+}
+
+.board_total {
+  margin-bottom: 1em;
+  color: #999;
+}
+
+.shop_count {
+  color: var(--main-color1);
+}
+
+#map_section .container {
+  position: relative;
+  /* outline: 1px solid red; */
+}
+
+#searchForm {
+  position: absolute;
+  left: 20px;
+  top: 80px;
+  z-index: 99;
+  background: #fff;
+  padding: 30px;
+  height: 320px;
+}
+
+.form-group {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+#searchForm input {
+  border: none;
+}
+
+#searchForm input:focus {
+  outline: none;
+}
+
+#submitBtn {
+  border: none;
+  background: transparent;
+}
